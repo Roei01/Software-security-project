@@ -3,6 +3,9 @@ from config import Config
 from models import db
 from auth import auth_bp, login_manager
 from vault import vault_bp
+import webbrowser
+import threading
+import time
 
 def create_app():
     app = Flask(__name__)
@@ -23,6 +26,14 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    # Run with adhoc SSL for local HTTPS
-    app.run(host="0.0.0.0", port=4000, ssl_context="adhoc")
+    def open_browser():
+        time.sleep(1.5)
+        webbrowser.open("https://127.0.0.1:4000/login", new=2)
+    threading.Thread(target=open_browser).start()
 
+    # Run with valid local certificate
+    app.run(
+        host="0.0.0.0",
+        port=4000,
+        ssl_context=("certs/localhost.pem", "certs/localhost-key.pem")
+    )
