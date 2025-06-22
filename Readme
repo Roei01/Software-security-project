@@ -6,4 +6,10 @@ python -m pytest -q
 
 for run:
 source venv/bin/activate
+
+//
+brew install nss
+mkcert -install
+//
+
 python3 app.py

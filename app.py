@@ -28,12 +28,13 @@ if __name__ == "__main__":
     app = create_app()
     def open_browser():
         time.sleep(1.5)
-        webbrowser.open("https://127.0.0.1:4000/login", new=2)
+        webbrowser.open("https://localhost:4000/login", new=2)
     threading.Thread(target=open_browser).start()
 
     # Run with valid local certificate
     app.run(
         host="0.0.0.0",
         port=4000,
-        ssl_context=("certs/localhost.pem", "certs/localhost-key.pem")
+        ssl_context=("certs/localhost+2.pem", "certs/localhost+2-key.pem")
     )
+
