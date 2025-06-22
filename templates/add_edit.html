@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>{{ action }} Password Record</h3>
+<form method="post" class="w-50">
+  <div class="mb-3">
+    <label class="form-label">Site</label>
+    <input type="text" name="site" class="form-control" value="{{ record.site if record else '' }}" required/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Login</label>
+    <input type="text" name="login" class="form-control" value="{{ record.login if record else '' }}" required/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="text" name="password" class="form-control" value="{{ record.password if record else '' }}" required/>
+  </div>
+  <button class="btn btn-primary">{{ action }}</button>
+  <a href="{{ url_for('vault.dashboard') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

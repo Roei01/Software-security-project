@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %}
+<div class="d-flex justify-content-between">
+  <h3>Manager Passwords</h3>
+  <a href="{{ url_for('vault.add_record') }}" class="btn btn-success"
+    >Add New</a
+  >
+</div>
+<table class="table table-striped mt-3">
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Login</th>
+      <th>Password</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td>{{ r.site }}</td>
+      <td>{{ r.login }}</td>
+      <td><code>{{ r.password }}</code></td>
+      <td>
+        <a
+          href="{{ url_for('vault.edit_record', rec_id=r.id) }}"
+          class="btn btn-sm btn-primary"
+          >Edit</a
+        >
+        <form
+          action="{{ url_for('vault.delete_record', rec_id=r.id) }}"
+          method="post"
+          style="display: inline"
+        >
+          <button
+            class="btn btn-sm btn-danger"
+            onclick="return confirm('Delete?');"
+          >
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
