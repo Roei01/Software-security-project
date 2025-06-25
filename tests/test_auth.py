@@ -11,4 +11,4 @@ def test_register_and_login(client):
 
     # login
     res = client.post('/login', data={'username': username, 'password': password}, follow_redirects=True)
-    assert b'Your Passwords' in res.data
+    assert b'Manager Passwords' in res.data
