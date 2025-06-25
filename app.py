@@ -35,6 +35,6 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=4000,
-        ssl_context=("certs/localhost+2.pem", "certs/localhost+2-key.pem")
+        ssl_context=("localhost+2.pem", "localhost+2-key.pem")
     )
 
