@@ -1,14 +1,42 @@
-for tests:
+macOS (bash):
+# 1. Install basic tools
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install git python@3.11 mkcert nss
 
-source venv/bin/activate
-python3 -m pytest -q
+# 2. Clone the project and set up a virtual environment
+git clone https://github.com/Roei01/Software-security-project.git
+cd Software-security-project
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
 
-for run:
-source venv/bin/activate
-
-//
-brew install nss
+# 3. Create a local HTTPS certificate
 mkcert -install
-//
+mkcert localhost 127.0.0.1 ::1    # Generates ﻿localhost+2.pem and the corresponding key
 
-python3 app.py
+# 4. Run the server
+python3 app.py     # Then open https://localhost:4000/login in your browser
+
+
+Windows (PowerShell – Run as Administrator):
+# 1. Install basic tools
+choco install git python --version=3.11 -y
+choco install mkcert nss -y
+
+# 2. Clone the project and set up a virtual environment
+git clone https://github.com/Roei01/Software-security-project.git
+cd Software-security-project
+python -m venv venv; .\venv\Scripts\Activate
+pip install -r requirements.txt
+
+# 3. Create a local HTTPS certificate
+mkcert -install
+mkcert localhost 127.0.0.1 ::1    # Generates localhost+2.pem and the key in the current folder
+
+# 4. Run the server
+python app.py     # Navigate to https://localhost:4000/login and bypass the local warning
+
+
+
+for test :
+python -m venv venv; .\venv\Scripts\Activate
+python3 -m pytest
